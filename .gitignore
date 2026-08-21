@@ -1,0 +1,17 @@
+# Theos output
+.theos/
+packages/
+
+# Compiled or packaged artifacts
+*.deb
+*.dylib
+*.ipa
+*.tipa
+*.dSYM/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
