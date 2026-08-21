@@ -1,8 +1,6 @@
 #import <Foundation/Foundation.h>
 
 static NSString *const kTargetBundleIdentifier = @"com.mcdonalds.mobileapp";
-static NSString *const kTargetVersion = @"3.39.1";
-static NSString *const kTargetBuild = @"25279";
 static NSString *const kMinimumBuildRemoteConfigKey = @"forceUpdate_minIOSBuild";
 
 // Minimal FIRRemoteConfigValue-compatible object. The app reads numberValue
@@ -50,13 +48,9 @@ static NSString *const kMinimumBuildRemoteConfigKey = @"forceUpdate_minIOSBuild"
 @end
 
 
-static BOOL IsTargetAppAndBuild(void) {
-    NSBundle *bundle = NSBundle.mainBundle;
-    NSDictionary *info = bundle.infoDictionary;
-
-    return [bundle.bundleIdentifier isEqualToString:kTargetBundleIdentifier] &&
-           [info[@"CFBundleShortVersionString"] isEqualToString:kTargetVersion] &&
-           [info[@"CFBundleVersion"] isEqualToString:kTargetBuild];
+static BOOL IsTargetApp(void) {
+    return [NSBundle.mainBundle.bundleIdentifier
+        isEqualToString:kTargetBundleIdentifier];
 }
 
 static BOOL IsMinimumBuildKey(id key) {
@@ -92,12 +86,15 @@ static BOOL IsMinimumBuildKey(id key) {
 
 %end
 
+
 %end
 
 
 %ctor {
     @autoreleasepool {
-        if (IsTargetAppAndBuild()) {
+        // Support any GMALite version. If Firebase Remote Config is absent,
+        // do nothing instead of attempting to hook an unavailable class.
+        if (IsTargetApp() && NSClassFromString(@"FIRRemoteConfig") != Nil) {
             %init(McDonaldsGlobalFixRemoteConfigBypass);
         }
     }

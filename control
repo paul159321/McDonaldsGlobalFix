@@ -1,8 +1,8 @@
 Package: com.paul159321.mcdonaldsglobalfix
 Name: McDonaldsGlobalFix
-Version: 1.5.0
+Version: 1.6.0
 Architecture: iphoneos-arm
-Description: Overrides GMALite 3.39.1's force-update Remote Config value.
+Description: Overrides GMALite's force-update Remote Config value.
 Maintainer: paul159321
 Author: paul159321
 Section: Tweaks

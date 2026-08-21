@@ -1,13 +1,12 @@
 # McDonaldsGlobalFix
 
-A narrowly scoped Theos tweak for GMALite `3.39.1` (`25279`). It overrides
-the Firebase Remote Config value used as the minimum supported iOS app build.
+A narrowly scoped Theos tweak for GMALite. It overrides the Firebase Remote
+Config value used as the minimum supported iOS app build.
 
 ## Scope
 
 - Bundle ID: `com.mcdonalds.mobileapp`
-- App version: `3.39.1`
-- Build: `25279`
+- App version/build: unrestricted
 - Remote Config key: `forceUpdate_minIOSBuild`
 - Architectures: `arm64`, `arm64e`
 - Default package scheme: rootless
@@ -34,9 +33,11 @@ builds a rootless package with both `arm64` and `arm64e` slices.
 Install the package on a compatible rootless jailbreak:
 
 ```sh
-dpkg -i packages/com.paul159321.mcdonaldsglobalfix_1.5.0_iphoneos-arm64.deb
-killall GMALite
+dpkg -i packages/com.paul159321.mcdonaldsglobalfix_1.6.0_iphoneos-arm64.deb
 ```
+
+Completely close GMALite before installation, then reopen it so the tweak is
+loaded into the new app process.
 
 If using an app-scoped injector, inject only the newly built dylib. Do not
 combine it with a system-installed copy of the tweak, and remove any older
@@ -44,11 +45,11 @@ embedded McDonaldsGlobalFix dylib first.
 
 ## Notes
 
-- Only the exact app version/build listed above is enabled.
+- Every `com.mcdonalds.mobileapp` version is allowed to load the tweak.
+- If `FIRRemoteConfig` is unavailable, the tweak does nothing.
+- Versions that no longer use `forceUpdate_minIOSBuild` are left unchanged.
 - No decrypted app, proprietary framework, signing material, or compiled
   binary is included in this repository.
-- A future app release may rename the Remote Config key or change its access
-  path and will require a separate analysis.
 
 ## Disclaimer
 

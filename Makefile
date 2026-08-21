@@ -3,7 +3,7 @@ ARCHS = arm64 arm64e
 THEOS_PACKAGE_SCHEME ?= rootless
 INSTALL_TARGET_PROCESSES = GMALite
 DEBUG = 0
-PACKAGE_VERSION = 1.5.0
+PACKAGE_VERSION = 1.6.0
 
 include $(THEOS)/makefiles/common.mk
 
